@@ -92,11 +92,10 @@ extern void als_thread(void *d0, void *d1, void *d2) {
 
     dev = DEVICE_DT_GET_ONE(avago_apds9960);
     if (!device_is_ready(dev)) {
-        printk("sensor: device not ready.[ %s ] \n", dev);
-        device_init(dev)
+        printk("sensor: device not ready.\n");
     } 
     if (device_is_ready(dev)) {
-        printk("sensor: READY.[ %s ] \n", dev);
+        printk("sensor: READY.\n");
     }
 
     // led_set_brightness(pwm_leds_dev, DISP_BL, 100);
