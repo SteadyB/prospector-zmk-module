@@ -8,12 +8,16 @@
 #include <zephyr/logging/log.h>
 LOG_MODULE_REGISTER(als, 4);
 
+/* overwrite acceptable device IDs */
+#define APDS9960_ID_2 0x9E
+
 static const struct device *pwm_leds_dev = DEVICE_DT_GET_ONE(pwm_leds);
 #define DISP_BL DT_NODE_CHILD_IDX(DT_NODELABEL(disp_bl))
 
 #ifdef CONFIG_PROSPECTOR_USE_AMBIENT_LIGHT_SENSOR
 
 static uint8_t current_brightness = 100;
+
 
 #define SENSOR_MIN      0       // Minimum sensor reading
 #define SENSOR_MAX      100   // Maximum sensor reading
@@ -86,12 +90,16 @@ extern void als_thread(void *d0, void *d1, void *d2) {
     struct sensor_value intensity;
     uint8_t mapped_brightness;
 
-    dev = DEVICE_DT_GET_ONE(avago_apds9960);
-    myDev = DEVICE_DT_GET_ANY(apds_9960);
-    printk("sensor: my Device [ %s ] \n", myDev);
+    dev = DEVICE_DT_GET_ANY(avago_apds9960);
 
-    if (!device_is_ready(myDev)) {
-        printk("sensor: device not ready.[ %s - %s ] \n", dev, myDev);
+    if (dev == NULL){
+        printk("no sensor\n");
+    }
+    if (!device_is_ready(dev)) {
+        printk("sensor: device not ready.[ %s ] \n", dev);
+        device_init(dev)
+    } else {
+        printk("sensor: READY.[ %s ] \n", dev);
     }
 
     // led_set_brightness(pwm_leds_dev, DISP_BL, 100);
