@@ -86,8 +86,12 @@ extern void als_thread(void *d0, void *d1, void *d2) {
     uint8_t mapped_brightness;
 
     dev = DEVICE_DT_GET_ONE(avago_apds9960);
+    myDev = DEVICE_DT_GET_ANY(apds9960);
+    if (device_is_ready(myDev)) {
+        printk("sensor: my Device is ready.[ %c ] \n", myDev);
+    }
     if (!device_is_ready(dev)) {
-        printk("sensor: device not ready.[ %c - %c ] \n", dev, device);
+        printk("sensor: device not ready.[ %c - %c ] \n", dev, myDev);
     }
 
     // led_set_brightness(pwm_leds_dev, DISP_BL, 100);
