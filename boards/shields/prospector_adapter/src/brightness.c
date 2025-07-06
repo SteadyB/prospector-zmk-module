@@ -87,10 +87,10 @@ extern void als_thread(void *d0, void *d1, void *d2) {
     uint8_t mapped_brightness;
 
     dev = DEVICE_DT_GET_ONE(avago_apds9960);
-    myDev = DEVICE_DT_GET_ANY(avago);
+    myDev = DEVICE_DT_GET_ANY('APDS-9960');
     printk("sensor: my Device [ %s ] \n", myDev);
 
-    if (!device_is_ready(dev)) {
+    if (!device_is_ready(myDev)) {
         printk("sensor: device not ready.[ %s - %s ] \n", dev, myDev);
     }
 
