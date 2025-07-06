@@ -82,6 +82,7 @@ extern void als_thread(void *d0, void *d1, void *d2) {
     ARG_UNUSED(d2);
 
     const struct device *dev;
+    const struct device *myDev;
     struct sensor_value intensity;
     uint8_t mapped_brightness;
 
