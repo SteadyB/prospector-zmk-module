@@ -9,7 +9,7 @@
 LOG_MODULE_REGISTER(als, 4);
 
 /* overwrite acceptable device IDs */
-#define APDS9960_ID_2 0x9E
+#define APDS9960_ID_REG 0x9e
 
 static const struct device *pwm_leds_dev = DEVICE_DT_GET_ONE(pwm_leds);
 #define DISP_BL DT_NODE_CHILD_IDX(DT_NODELABEL(disp_bl))
